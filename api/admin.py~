@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from poe.api.models import Category, Photo, Product, Account
+from proxicde.api.models import Category, Photo, Product, Account
 
 class AccountAdmin(admin.ModelAdmin):
     pass

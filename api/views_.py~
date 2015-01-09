@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from poe.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer
-from poe.api.models import Account, Photo, Category, Product
+from proxicode.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer
+from proxicode.api.models import Account, Photo, Category, Product
 import datetime
 from django.utils.timezone import utc
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -71,7 +71,7 @@ def show_picture(request, filename, isthumb):
     from sorl.thumbnail import delete
 
     from django.shortcuts import get_object_or_404
-    from poe.api.authentication import ExpiringTokenAuthentication
+    from proxicode.api.authentication import ExpiringTokenAuthentication
 
     import os
     import mimetypes

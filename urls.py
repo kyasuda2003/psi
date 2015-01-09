@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from rest_framework import routers
-from poe.api import views_
+from proxicode.api import views_
 from django.contrib import admin
 admin.autodiscover()
 
@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^media/photos/(?P<filename>[\w,\s-]+\.[A-Za-z]{3})(/(?P<isthumb>[\w,\s]))?', views_.show_picture),
     url(r"^$", views_.index,name='index'),
     url(r'^entry', views_.index, name='index'),
+    url(r'', include('social_auth.urls')),
 ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from proxicde.api.models import Category, Photo, Product, Account
+from proxicode.api.models import Category, Photo, Product, Account
 
 class AccountAdmin(admin.ModelAdmin):
     pass

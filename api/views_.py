@@ -58,7 +58,7 @@ def index(request):
     #latest_question_list = Question.objects.order_by('-pub_date')[:5]
     #context = {'latest_question_list': latest_question_list}
     #return render(request, 'polls/index.html', context)
-    return render(request, 'theta/index.django.html')
+    return render(request, 'psi/index.django.html')
 
 def show_picture(request, filename, isthumb):
     from django.conf import settings
