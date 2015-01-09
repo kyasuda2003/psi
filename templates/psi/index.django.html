@@ -1,0 +1,189 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html ng-app="poeApp">
+    <head>
+        <title>Pacific Oasis Enterprise, Inc. Dev.</title>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/layout.css' %}" rel="stylesheet" type="text/css" />
+        <!--<link href="{% static 'cssbootstrap.min.css' %}" rel="stylesheet" type="text/css" />-->
+        <script type="text/javascript" src="{% static 'lib/angular/angular.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/services.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/controllers.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/filters.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/directives.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/jquery/jquery-1.10.2.min.js' %}"></script>
+        <!--<script type="text/javascript" src="{% static 'lib/jquery/bootstrap.min.js' %}"></script>-->
+        <script type="text/javascript" src="{% static 'lib/cufon-yui.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/news_gothic_700.font.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/swiss_721_italic_500.font.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/swiss_721_400.font.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/jquery.anythingslider.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/jquery.easing.1.2.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/jquery.slideshow.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.conf.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/poe/poe-lib.js' %}"></script>
+        <!--[if lt IE 7]-->
+        <script type="text/javascript" src="{% static 'lib/ie_png.js' %}"></script>
+        <script type="text/javascript">
+            DD_belatedPNG.fix('.social a');
+        </script>
+        <!--[endif]-->
+    </head>
+    <body id="page1">
+        <div class="top-bg">
+            <div class="bottom-bg">
+                <div class="top-center">
+                    <div class="bottom-center">
+                        <div id="main">
+                            <!--header -->
+                            <div id="header">
+                                <a href="/">
+                                    <img src="{% static 'img/logo.jpg' %}" alt="" class="logo" />
+                                </a>
+                                <div class="container">
+                                    <div class="social">
+                                        <a href="#" class="twitter">&nbsp;</a><a href="http://www.facebook.com/pages/Pacific-Oasis-Enterprise-Inc/288212501208185" class="facebook">&nbsp;</a><a href="#" class="stumbleupon">&nbsp;</a><a href="#" class="rss">&nbsp;</a>
+                                    </div>
+                                </div>
+                                <div class="menu">
+                                    <ul>
+                                        <li class="active"><a href="javascript:void(0);" onclick="app.ui.switchView(this, window,'#/main');">Home</a>
+                                        </li>
+                                        <li><a href="javascript:void(0);" onclick="app.ui.switchView(this, window,'#/product');">Items</a>
+                                        </li>
+                                        <li><a href="javascript:void(0);">People</a>
+                                        </li>
+                                        <li><a href="javascript:void(0);">News</a>
+                                        </li>
+                                        <li><a href="javascript:void(0);">About</a>
+                                        </li>
+                                        <li><a href="javascript:void(0);" onclick="app.ui.switchView(this, window,'#/contact');">Contact</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="show">
+                                    <div class="playPauseExample slideShow">
+                                        <ul class="slides">
+                                            <li class="slide">
+                                                <img src="{% static 'img/img1.jpg' %}" alt="" width="978" height="526" />
+                                                <div class="slogan">
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                </div>
+                                            </li>
+                                            <li class="slide">
+                                                <img src="{% static 'img/img2.jpg' %}" alt="" width="978" height="526" />
+                                                <div class="slogan">
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                </div>
+                                            </li>
+                                            <li class="slide">
+                                                <img src="{% static 'img/img3.jpg' %}" alt="" width="978" height="526" />
+                                                <div class="slogan">
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                </div>
+                                            </li>
+                                            <li class="slide">
+                                                <img src="{% static 'img/img4.jpg' %}" alt="" width="978" height="526" />
+                                                <div class="slogan">
+                                                    <img src="{% static 'img/slogan.png' %}" alt="" />Variety of Items, Global Representatives to fulfill your Order.
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <a href="#" class="togglePlayback">Stop</a>
+                                        <div class="wrapper">
+                                            <ul class="navigation" id="thumbNav">
+                                                <li><a href="javascript:" class="page">&nbsp;</a>
+                                                </li>
+                                                <li><a href="javascript:" class="page">&nbsp;</a>
+                                                </li>
+                                                <li><a href="javascript:" class="page">&nbsp;</a>
+                                                </li>
+                                                <li><a href="javascript:" class="page">&nbsp;</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="boxes-indent">
+                                        <div class="box banner">
+                                            <div class="box-indent">
+                                                <h3>Introduction</h3>
+                                                <span>The company increase its capitalization to $400,000.00 in order to be able to survive the unending competition in the market and  <a href="#">...</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="box1 banner">
+                                            <div class="box1-indent">
+                                                <h3>About Pacific   </h3>
+                                                <span>We're hiring: IMPORT COORDINATOR: Locate and order household goods/clothing from China. Arrange shipping, customs,      <a href="#">...</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="box2 banner">
+                                            <div class="box2-indent">
+                                                <h3>New Product </h3>
+                                                <span>After thorough research Pacific Oasis Enterprise, Inc. had learned that because of population growth, illness due to MISHANDLING  <a href="#">...</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--header end-->
+                            <div id="content">
+                                <div ng-view></div>
+                                <div class="anythingSlider2 banners">
+                                    <div class="wrapper">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <img src="{% static 'img/banner1.jpg' %}" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="{% static 'img/banner2.jpg' %}" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="{% static 'img/banner3.jpg' %}" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="{% static 'img/banner4.jpg' %}" alt="" />
+                                                </a>
+                                                <a href="#">
+                                                    <img src="{% static 'img/banner5.jpg' %}" alt="" />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--footer -->
+                            <div id="footer">
+                                <div class="indent">
+                                    <div class="container">
+                                        <div class="policy">
+                                            Global Headquaters
+                                            <br />8413 Secura Way Unit B Santa Fe Springs, CA 90670 USA E-mail: <a href="#" class="link2-2">info@pacificoasis.com</a>
+
+                                        </div>
+                                        <form id="SubscribeForm" action="">
+                                            <div>
+                                                <label>
+                                                    <input type="text" value="Enter your e-mail here:" class="input" onblur="if (this.value == '')
+                                                            this.value = 'Enter your e-mail here:'" onfocus="if (this.value == 'Enter your e-mail here:')
+                                                                        this.value = ''" />
+                                                </label>
+                                                <input type="image" src="{% static 'img/input-img.jpg' %}" />
+                                                <br />
+                                                <a href="#">Unsubscribe</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--footer end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<div class="indent1" style="height:auto;">
+    <div class="container" style=" height:auto">
+        <div class="col-1 col-pad">
+            <h2>All Items</h2>
+            <div class="col-indent">
+                <ul>
+                    <li><a href="#">Janitorial</a>
+                    </li>
+                    <li><a href="#">Disposable</a>
+                    </li>
+                    <li><a href="#">Cleaning</a>
+                    </li>
+                    <li><a href="#">Accessories</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-1 col-pad" style="padding-top:10px; width:240px;">
+                <h2>Feedbacks</h2>
+                <div class="col-indent">
+
+                    <p><span class="title">Fantastic item at fair price.</span> 
+                    </p>
+                    <p style="padding:0px; width:200px;" align="right">Jane Doe, Phoenix, AZ</p>
+
+                    <p><span class="title">Unbelivable quality, nice communication. A+++ Seller</span> 
+                    </p>
+                    <p style="padding:0px; width:200px;" align="right">John Doe, New York, NY</p>
+
+                    <p><span class="title">Quick shipping, low but high margin of profit.</span> 
+                    </p>
+                    <p style="padding:0px; width:200px;" align="right">Jane Doe, Phoenix, AZ</p>
+
+
+                    <p><span class="title">I just love Pacific Oasis!</span> 
+                    </p>
+                    <p style="padding:0px; width:200px;" align="right">John Doe, New York, NY</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div ng-repeat="(catKey, catVal) in productData">
+                <h2>{{catVal.name}}</h2>
+
+                <div style="float:left; width:100%">
+
+                    <table width="100%" border="0" cellspacing="2" cellpadding="0">
+                        <tr ng-repeat="rows in catVal.prodArray">
+                            <td>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="poe-prod-table">
+                                    <tr>
+                                        <td align="center" ng-repeat="prod in rows">
+                                            <a ng-click="browsePhoto(prod.photos)" rel="lightbox" title="{{prod.description}}">
+                                                <img ng-src="{{getPhoto(prod.photos,true)}}" alt="" class="imgbordeimg" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" class="blacktext" ng-repeat="prod in rows">
+                                            <p>
+                                                <span class="bluetext">{{prod.description}}</span>
+                                                <br/>
+                                                Item#: <span class="bluetext">{{prod.code}}</span>
+                                                <br/>
+                                                Size: <span class="bluetext">{{prod.case_height}}x{{prod.case_length}}</span> 
+                                                <br/>
+                                                Case/Pack: <span class="bluetext">{{prod.case_pack}}</span> 
+                                                </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
