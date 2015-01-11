@@ -7,6 +7,7 @@ angular.module('pcApp.controllers', [])
     sc.$on('$routeChangeSuccess', function () {
         $('.nav.navbar-nav li').removeClass('active');
         $('.nav.navbar-nav li:eq(0)').addClass('active');
+        $('div.pc-authenticate-only-section').fadeIn(150, function (){});
         
         //$('#login-block').fadeOut(500, function () {});
     });
@@ -38,6 +39,7 @@ angular.module('pcApp.controllers', [])
     
     sc.$on('$routeChangeSuccess', function () {
         $('.nav.navbar-nav li').removeClass('active');
+        $('div.pc-authenticate-only-section').fadeIn(150, function (){});
         //$('.nav.navbar-nav li:eq(1)').addClass('active');
         
         //$('#login-block').fadeOut(500, function (){});
@@ -49,6 +51,7 @@ angular.module('pcApp.controllers', [])
         if (!app.api.isAuthenticated()){
             var go2url=wi.location.pathname;
             wi.location.replace(go2url+'#/login');
+            return;
         }    
 
         $('.nav.navbar-nav li').removeClass('active');
@@ -58,6 +61,6 @@ angular.module('pcApp.controllers', [])
             defaultDate: new Date()
         });
 
-        $('#login-block').fadeOut(500, function (){});
+        $('div.pc-authenticate-only-section').fadeIn(150, function (){});
     });
 }]);
