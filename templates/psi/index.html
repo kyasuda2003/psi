@@ -1,186 +1,95 @@
 <!DOCTYPE html>
-<html ng-app="poeApp">
-    <head>
-        <title>Pacific Oasis Enterprise, Inc. Dev.</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <link href="css/layout.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="./lib/angular/angular.js"></script>
-        <script type="text/javascript" src="./js/app.js"></script>
-        <script type="text/javascript" src="./js/services.js"></script>
-        <script type="text/javascript" src="./js/controllers.js"></script>
-        <script type="text/javascript" src="./js/filters.js"></script>
-        <script type="text/javascript" src="./js/directives.js"></script>
-        <script type="text/javascript" src="./lib/jquery/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="./lib/cufon-yui.js"></script>
-        <script type="text/javascript" src="./lib/news_gothic_700.font.js"></script>
-        <script type="text/javascript" src="./lib/swiss_721_italic_500.font.js"></script>
-        <script type="text/javascript" src="./lib/swiss_721_400.font.js"></script>
-        <script type="text/javascript" src="./lib/jquery.anythingslider.js"></script>
-        <script type="text/javascript" src="./lib/jquery.easing.1.2.js"></script>
-        <script type="text/javascript" src="./lib/jquery.slideshow.js"></script>
-        <script type="text/javascript" src="./js/app.conf.js"></script>
-        <script type="text/javascript" src="./lib/poe/poe-lib.js"></script>
-        <!--[if lt IE 7]-->
-        <script type="text/javascript" src="./lib/ie_png.js"></script>
-        <script type="text/javascript">
-            DD_belatedPNG.fix('.social a');
-        </script>
-        <!--[endif]-->
-    </head>
-    <body id="page1">
-        <div class="top-bg">
-            <div class="bottom-bg">
-                <div class="top-center">
-                    <div class="bottom-center">
-                        <div id="main">
-                            <!--header -->
-                            <div id="header">
-                                <a href="/">
-                                    <img src="./img/logo.jpg" alt="" class="logo" />
-                                </a>
-                                <div class="container">
-                                    <div class="social">
-                                        <a href="#" class="twitter">&nbsp;</a><a href="http://www.facebook.com/pages/Pacific-Oasis-Enterprise-Inc/288212501208185" class="facebook">&nbsp;</a><a href="#" class="stumbleupon">&nbsp;</a><a href="#" class="rss">&nbsp;</a>
-                                    </div>
-                                </div>
-                                <div class="menu">
-                                    <ul>
-                                        <li class="active"><a href="javascript:void(0);" onclick="app.ui.switchView(window,'#/main');">Home</a>
-                                        </li>
-                                        <li><a href="javascript:void(0);" onclick="app.ui.switchView(window,'#/product');">Items</a>
-                                        </li>
-                                        <li><a href="/servlet/people">People</a>
-                                        </li>
-                                        <li><a href="/servlet/news">News</a>
-                                        </li>
-                                        <li><a href="/servlet/about">About</a>
-                                        </li>
-                                        <li><a href="/servlet/contact">Contact</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="show">
-                                    <div class="playPauseExample slideShow">
-                                        <ul class="slides">
-                                            <li class="slide">
-                                                <img src="./img/img1.jpg" alt="" width="978" height="526" />
-                                                <div class="slogan">
-                                                    <img src="./img/slogan.png" alt="" />Variety of Items, Global Representatives to fulfill your Order.
-                                                </div>
-                                            </li>
-                                            <li class="slide">
-                                                <img src="./img/img2.jpg" alt="" width="978" height="526" />
-                                                <div class="slogan">
-                                                    <img src="./img/slogan.png" alt="" />Variety of Items, Global Representatives to fulfill your Order.
-                                                </div>
-                                            </li>
-                                            <li class="slide">
-                                                <img src="./img/img3.jpg" alt="" width="978" height="526" />
-                                                <div class="slogan">
-                                                    <img src="./img/slogan.png" alt="" />Variety of Items, Global Representatives to fulfill your Order.
-                                                </div>
-                                            </li>
-                                            <li class="slide">
-                                                <img src="./img/img4.jpg" alt="" width="978" height="526" />
-                                                <div class="slogan">
-                                                    <img src="./img/slogan.png" alt="" />Variety of Items, Global Representatives to fulfill your Order.
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <a href="#" class="togglePlayback">Stop</a>
-                                        <div class="wrapper">
-                                            <ul class="navigation" id="thumbNav">
-                                                <li><a href="javascript:" class="page">&nbsp;</a>
-                                                </li>
-                                                <li><a href="javascript:" class="page">&nbsp;</a>
-                                                </li>
-                                                <li><a href="javascript:" class="page">&nbsp;</a>
-                                                </li>
-                                                <li><a href="javascript:" class="page">&nbsp;</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container">
-                                    <div class="boxes-indent">
-                                        <div class="box banner">
-                                            <div class="box-indent">
-                                                <h3>Introduction</h3>
-                                                <span>The company increase its capitalization to $400,000.00 in order to be able to survive the unending competition in the market and  <a href="#">...</a></span>
-                                            </div>
-                                        </div>
-                                        <div class="box1 banner">
-                                            <div class="box1-indent">
-                                                <h3>About Pacific   </h3>
-                                                <span>We're hiring: IMPORT COORDINATOR: Locate and order household goods/clothing from China. Arrange shipping, customs,      <a href="#">...</a></span>
-                                            </div>
-                                        </div>
-                                        <div class="box2 banner">
-                                            <div class="box2-indent">
-                                                <h3>New Product </h3>
-                                                <span>After thorough research Pacific Oasis Enterprise, Inc. had learned that because of population growth, illness due to MISHANDLING  <a href="#">...</a></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--header end-->
-                            <div id="content">
-                                <div ng-view></div>
-                                <div class="anythingSlider2 banners">
-                                    <div class="wrapper">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="./img/banner1.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="./img/banner2.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="./img/banner3.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="./img/banner4.jpg" alt="" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="./img/banner5.jpg" alt="" />
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--footer -->
-                            <div id="footer">
-                                <div class="indent">
-                                    <div class="container">
-                                        <div class="policy">
-                                            Global Headquaters
-                                            <br />8413 Secura Way Unit B Santa Fe Springs, CA 90670 USA E-mail: <a href="#" class="link2-2">info@pacificoasis.com</a>
+<html lang="en" ng-app="pcApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-                                        </div>
-                                        <form id="SubscribeForm" action="">
-                                            <div>
-                                                <label>
-                                                    <input type="text" value="Enter your e-mail here:" class="input" onblur="if (this.value == '')
-                                                            this.value = 'Enter your e-mail here:'" onfocus="if (this.value == 'Enter your e-mail here:')
-                                                                        this.value = ''" />
-                                                </label>
-                                                <input type="image" src="./img/input-img.jpg" />
-                                                <br />
-                                                <a href="#">Unsubscribe</a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--footer end-->
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Note there is no responsive meta tag here -->
+
+    <link rel="icon" href="./favicon.ico">
+
+    <title>Proxy Services</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/pc.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ProxiCode</a>
         </div>
-    </body>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#/index">Home</a></li>
+            <li><a href="#scheduler">Social Scheduler</a></li>
+            <li><a href="#join">Invite Me</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div ng-view></div>
+    <footer class="footer">
+      <div class="container">
+          <p class="text-muted">ProxiCode supports open source, and is written in python and nodejs. Fork us at <a href="https://github.com/kyasuda2003/psi">Github</a></p>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./lib/bootstrap/bootstrap.min.js"></script>
+    <script src="./lib/moment/moment.min.js"></script>
+    
+    <script src="./lib/angular/angular.js"></script>
+    <script src="./js/app.conf.js"></script>
+    <script src="./lib/pc/proxicode-1.0.0.js"></script>
+        
+    <script src="./js/app.js"></script>
+    <script src="./js/services.js"></script>
+    <script src="./js/controllers.js"></script>
+    <script src="./js/filters.js"></script>
+    <script src="./js/directives.js"></script>
+    
+    <script src="./lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./lib/ie/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

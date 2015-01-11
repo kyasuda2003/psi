@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pcApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,13 +11,14 @@
 
     <link rel="icon" href="{% static 'favicon.ico'%}">
 
-    <title>Non-responsive Template for Bootstrap</title>
+    <title>Proxy Services</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/pc.css'%}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,13 +39,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">ProxiCode</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="#/index">Home</a></li>
+            <li><a href="#scheduler">Social Scheduler</a></li>
+            <li><a href="#join">Invite Me</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -58,54 +59,39 @@
               </ul>
             </li>
           </ul>
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1>Non-responsive Bootstrap</h1>
-        <p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information.</p>
+    <div ng-view></div>
+    <footer class="footer">
+      <div class="container">
+          <p class="text-muted">ProxiCode supports open source, and is written in python and nodejs. Fork us at <a href="https://github.com/kyasuda2003/psi">Github</a></p>
       </div>
-
-      <h3>What changes</h3>
-      <p>Note the lack of the <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code>, which disables the zooming aspect of sites in mobile devices. In addition, we reset our container's width and are basically good to go.</p>
-
-      <h3>Regarding navbars</h3>
-      <p>As a heads up, the navbar component is rather tricky here in that the styles for displaying it are rather specific and detailed. Overrides to ensure desktop styles display are not as performant or sleek as one would like. Just be aware there may be potential gotchas as you build on top of this example when using the navbar.</p>
-
-      <h3>Browsers, scrolling, and fixed elements</h3>
-      <p>Non-responsive layouts highlight a key drawback to fixed elements. <strong class="text-danger">Any fixed component, such as a fixed navbar, will not be scrollable when the viewport becomes narrower than the page content.</strong> In other words, given the non-responsive container width of 970px and a viewport of 800px, you'll potentially hide 170px of content.</p>
-      <p>There is no way around this as it's default browser behavior. The only solution is a responsive layout or using a non-fixed element.</p>
-
-      <h3>Non-responsive grid system</h3>
-      <div class="row">
-        <div class="col-xs-4">One third</div>
-        <div class="col-xs-4">One third</div>
-        <div class="col-xs-4">One third</div>
-      </div>
-
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{% static 'lib/bootstrap/bootstrap.min.js'%}"></script>
+    <script src="{% static 'lib/moment/moment.min.js'%}"></script>
+    
+    <script src="{% static 'lib/angular/angular.js'%}"></script>
+    <script src="{% static 'js/app.conf.js'%}"></script>
+    <script src="{% static 'lib/pc/proxicode-1.0.0.js'%}"></script>
+        
+    <script src="{% static 'js/app.js'%}"></script>
+    <script src="{% static 'js/services.js'%}"></script>
+    <script src="{% static 'js/controllers.js'%}"></script>
+    <script src="{% static 'js/filters.js'%}"></script>
+    <script src="{% static 'js/directives.js'%}"></script>
+    
+    <script src="{% static 'lib/datetimepicker/bootstrap-datetimepicker.min.js'%}"></script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static 'lib/ie/ie10-viewport-bug-workaround.js'%}"></script>
   </body>
 </html>
+

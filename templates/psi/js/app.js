@@ -1,11 +1,11 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('poeApp', ['poeApp.filters', 'poeApp.services', 'poeApp.directives', 'poeApp.controllers']).
-  config(['$routeProvider', function($routeProvider) {
+angular.module('pcApp', ['pcApp.filters', 'pcApp.services', 'pcApp.directives', 'pcApp.controllers']).
+  config(['$routeProvider', function(rp) {
      
-    $routeProvider.when('/main', {templateUrl: app.settings.apppath+'partials/alpha.html', controller: 'alpha'});
-    $routeProvider.when('/product', {templateUrl: app.settings.apppath+'partials/beta.html', controller: 'beta'});
-    $routeProvider.when('/contact', {templateUrl: app.settings.apppath+'partials/gamma.html', controller: 'gamma'});
-    $routeProvider.otherwise({redirectTo: '/main'});
+    rp.when('/index', {templateUrl: app.settings.apppath+'partials/alpha.html', controller: 'alpha'});
+    rp.when('/login', {templateUrl: app.settings.apppath+'partials/beta.html', controller: 'beta'});
+    rp.when('/scheduler', {templateUrl: app.settings.apppath+'partials/gamma.html', controller: 'gamma'});
+    rp.otherwise({redirectTo: '/index'});
   }]);
