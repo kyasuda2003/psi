@@ -91,9 +91,9 @@
 
   app.api = (function() {
     var _this = this,
-        _userInfo= {},
-        _data=function(){
-            
+        _userInfo = {},
+        _data={
+            eventList:{}
         };
     
     return {
@@ -104,13 +104,33 @@
                         _userInfo.token=data.token;
                 });
       },
-      getData:function(){
-          
+      transaction:{
+            addAnEvent:function(event){
+                event.id=Object.keys(_data.eventList).length;
+                _data.eventList[event.id.toString()]=event;
+            },
+            getAllSocialEvents:function(){
+                return $.map(_data.eventList, function(value, index) {
+                    return [value];
+                });
+            }
       },
       isAuthenticated:function(){
           return _userInfo.token?true:false;
       }
     };
   })();
+  
+  app.schema={
+      mediaType:['facebook',
+                 'twitter',
+                 'google'],
+      actionType:['Post',
+                'Birthday',
+                'Gift'],
+      statusType:['scheduled',
+              'processed',
+              'pending']
+  };
 
 }).call(this);

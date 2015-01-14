@@ -1,67 +1,76 @@
 <div class="container table-responsive pc-authenticate-only-section">
     <h3>Proxify a Social Media</h3>
     <p>Schedule your actions with social media.</p>
-    <div class="row">
-        <div class="col-xs-2 pc-col">
-            <select class="form-control">
-                <option>Media Type</option>
-                <option>facebook</option>
-                <option>twitter</option>
-                <option>google</option>
-            </select>
-        </div>
-        <div class="col-xs-2 pc-col">
-            <select class="form-control">
-                <option>Action Type</option>
-                <option>Post</option>
-                <option>Birthday</option>
-                <option>Gift</option>
-            </select>
-        </div>
-        <div class="col-xs-3 pc-col">
-            <div class="form-group">
-                <div class="input-group date pc-datetimepicker">
-                    <input type="text" class="form-control" placeholder="Date & Time">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-4 pc-col"><input type="text" class="form-control" placeholder="Message"></div>
-        <div class="col-xs-1 pc-col"><button type="submit" class="btn btn-default">Add</button></div>
-    </div>
-    <h3>Proxify an Event</h3>
-    <p>Schedule your actions with a random event.</p>
-    <div class="row">
-        <div class="col-xs-2 pc-col">
-            <select class="form-control">
-                <option>Media Type</option>
-                <option>facebook</option>
-                <option>twitter</option>
-                <option>google</option>
-            </select>
-        </div>
-        <div class="col-xs-2 pc-col">
-            <select class="form-control">
-                <option>Action Type</option>
-                <option>Post</option>
-                <option>Birthday</option>
-                <option>Gift</option>
-            </select>
-        </div>
-        <div class="col-xs-3 pc-col">
-            <div class="form-group">
-                <div class="input-group date pc-datetimepicker">
-                    <input type="text" class="form-control" placeholder="Date & Time">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-4 pc-col"><input type="text" class="form-control" placeholder="Message"></div>
-        <div class="col-xs-1 pc-col"><button type="submit" class="btn btn-default">Add</button></div>
-    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-2">Social Media</th>
+                <th class="col-md-2">To do</th>
+                <th class="col-md-3">Schedule</th>
+                <th class="col-md-4">Message</th>
+                <th class="col-md-1">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pc-table-header">
+                <td><select id="sel-media" class="form-control" ng-options="item.id+1 as item.name for item in mediaList()" ng-model="event.media" required>
+                        <option value="" >Select Media</option>
+                    </select></td>
+                <td><select id="sel-action" class="form-control" ng-options="item.id+1 as item.name for item in actionList()" ng-model="event.action" required>
+                        <option value="" >Select Action</option>
+                    </select></td>
+                <td><div class="form-group">
+                        <div class="input-group date pc-datetimepicker">
+                            <input type="text" class="form-control" placeholder="Date & Time" id="eventdate" required>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div></td>
+                <td><textarea id="txt-message" class="form-control" rows="3" placeholder="Your Message" ng-model="event.message" required></textarea></td>
+
+                <td><button type="submit" ng-click="addEvent(event)" class="btn btn-default">Add</button></td></tr>
+            <tr ng-repeat="evt in socialEvent() | orderBy:'id':true">
+                <td>{{getMediaType(evt.media)}}</td>
+                <td>{{getActionType(evt.action)}}</td>
+                <td>{{evt.eventdate}}</td>
+                <td>{{evt.message}}</td>
+                <td>{{getStatusType(evt.status)}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Proxify a Questionnaire Set</h3>
+    <p>Survey your contacts with a scheduled series of questionnaires.</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-2">Questions</th>
+                <th class="col-md-2">Options</th>
+                <th class="col-md-3">Schedule</th>
+                <th class="col-md-4">Contacts List</th>
+                <th class="col-md-1">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pc-table-header">
+                <td><select id="sel-media" class="form-control" ng-options="item.id+1 as item.name for item in mediaList()" ng-model="question.media" required>
+                        <option value="" >Select Question Set</option>
+                    </select></td>
+                <td><select id="sel-action" class="form-control" ng-options="item.id+1 as item.name for item in actionList()" ng-model="question.action" required>
+                        <option value="" >Select Options</option>
+                    </select></td>
+                <td><div class="form-group">
+                        <div class="input-group date pc-datetimepicker">
+                            <input type="text" class="form-control" placeholder="Date & Time" id="eventdate" required>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div></td>
+                <td><textarea id="txt-message" class="form-control" rows="3" placeholder="Your Contact List" ng-model="question.message" required></textarea></td>
+
+                <td><button type="submit" ng-click="" class="btn btn-default">Send</button></td></tr>
+        </tbody>
+    </table>
 
 </div>

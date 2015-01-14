@@ -62,6 +62,10 @@ div.pc-authenticate-only-section{
   display: none;
 }
 
+tr.pc-table-header:hover{
+  background-color: white !important;  
+}
+
 .container .navbar-header,
 .container .navbar-collapse {
   margin-right: 0;
@@ -239,10 +243,13 @@ div.pc-authenticate-only-section{
   
   z-index: 2;
 }
-.form-signin .form-control.err {
+
+.form-signin .form-control.err,
+.form-control.err {
   box-shadow:0 0 8px rgba(139,0,0,.6);
   border-color:rgba(139,0,0,.6);
 }
+
 .form-signin input[type="text"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
