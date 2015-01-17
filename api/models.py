@@ -19,6 +19,9 @@ import os
 
 class Account(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    username   = models.CharField(max_length=100)
+    last_login = models.DateTimeField(blank=True)
+    is_active  = models.BooleanField(default=False)
     def __unicode__(self):
         return self.user.username
 
