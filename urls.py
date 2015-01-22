@@ -13,6 +13,10 @@ router.register(r'categories',views_.CategoryViewSet)
 router.register(r'photos',views_.PhotoViewSet)
 router.register(r'accounts',views_.AccountViewSet)
 router.register(r'products',views_.ProductViewSet)
+router.register(r'social-networks',views_.SocialNetworkViewSet)
+router.register(r'actions',views_.ActionViewSet)
+router.register(r'social-network-schedulers',views_.SocialNetworkSchedulerViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

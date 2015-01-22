@@ -19,11 +19,28 @@ import os
 
 class Account(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    username   = models.CharField(max_length=100)
-    last_login = models.DateTimeField(blank=True)
+    #username   = models.CharField(max_length=100)
+    #last_login = models.DateTimeField(blank=True)
     is_active  = models.BooleanField(default=False)
     def __unicode__(self):
         return self.user.username
+
+class SocialNetwork(models.Model):
+    name = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.name
+
+class Action(models.Model):
+    name = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.name
+
+class SocialNetworkScheduler(models.Model):
+    socialNetwork = models.ManyToManyField(SocialNetwork, verbose_name="social netowrk list")
+    action = models.ManyToManyField(Action,verbose_name="action list")
+    comment = models.TextField(max_length=500)
+    def __unicode__(self):
+        return self.message
 
 class Photo(models.Model):
     content = models.ImageField(upload_to=settings.UPLOAD_DIR)

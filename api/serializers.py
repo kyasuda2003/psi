@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from proxicode.api.models import Account, Photo, Category, Product
+from proxicode.api.models import SocialNetwork, Action, SocialNetworkScheduler, Account, Photo, Category, Product
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -32,5 +32,20 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('id','code','description','case_pack','case_length','case_width','case_height','cu_ft','wt_lbs','wt_dim_ups','nmfc','_class','pallet_tie','pallet_high','case_pallet','one_plt_wt','categories','photos',)
+
+class SocialNetworkSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SocialNetwork
+        fields = ('name','id',)
+
+class ActionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Action
+        fields = ('name','id',)
+
+class SocialNetworkSchedulerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SocialNetworkScheduler
+        fields = ('socialNetwork','action','comment','id',)
 
 

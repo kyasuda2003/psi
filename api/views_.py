@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from proxicode.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer
-from proxicode.api.models import Account, Photo, Category, Product
+from proxicode.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer, SocialNetworkSerializer, ActionSerializer, SocialNetworkSchedulerSerializer
+from proxicode.api.models import Account, Photo, Category, Product, SocialNetwork, Action, SocialNetworkScheduler
 import datetime
 from django.utils.timezone import utc
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -32,6 +32,18 @@ class PhotoViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+class SocialNetworkViewSet(viewsets.ModelViewSet):
+    queryset = SocialNetwork.objects.all()
+    serializer_class = SocialNetworkSerializer
+
+class ActionViewSet(viewsets.ModelViewSet):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer
+
+class SocialNetworkSchedulerViewSet(viewsets.ModelViewSet):
+    queryset = SocialNetworkScheduler.objects.all()
+    serializer_class = SocialNetworkSchedulerSerializer
 
 class ObtainExpiringAuthToken(ObtainAuthToken):
     def post(self, request):
