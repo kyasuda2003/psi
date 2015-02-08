@@ -13,10 +13,10 @@
         </thead>
         <tbody>
             <tr class="pc-table-header">
-                <td><select id="sel-media" class="form-control" ng-options="item.id+1 as item.name for item in mediaList()" ng-model="event.media" required>
+                <td><select id="sel-media" class="form-control" ng-options="obj.id as obj.name for obj in mediaList()" ng-model="event.media" required>
                         <option value="" >Select Media</option>
                     </select></td>
-                <td><select id="sel-action" class="form-control" ng-options="item.id+1 as item.name for item in actionList()" ng-model="event.action" required>
+                <td><select id="sel-action" class="form-control" ng-options="obj.id as obj.name for obj in actionList()" ng-model="event.action" required>
                         <option value="" >Select Action</option>
                     </select></td>
                 <td><div class="form-group">
@@ -30,12 +30,12 @@
                 <td><textarea id="txt-message" class="form-control" rows="3" placeholder="Your Message" ng-model="event.message" required></textarea></td>
 
                 <td><button type="submit" ng-click="addEvent(event)" class="btn btn-default">Add</button></td></tr>
-            <tr ng-repeat="evt in socialEvent() | orderBy:'id':true">
-                <td>{{getMediaType(evt.media)}}</td>
-                <td>{{getActionType(evt.action)}}</td>
+            <tr ng-repeat="evt in eventList() | orderBy:'id':true">
+                <td>{{getMedia(evt.media)}}</td>
+                <td>{{getAction(evt.action)}}</td>
                 <td>{{evt.eventdate}}</td>
                 <td>{{evt.message}}</td>
-                <td>{{getStatusType(evt.status)}}</td>
+                <td>{{getStatus(evt.status)}}</td>
             </tr>
         </tbody>
     </table>

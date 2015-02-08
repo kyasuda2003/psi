@@ -9,32 +9,32 @@ angular.module('pcApp.controllers', [])
         $('.nav.navbar-nav li:eq(0)').addClass('active');
         $('div.pc-authenticate-only-section').fadeIn(150, function () {
         });
-
-        //$('#login-block').fadeOut(500, function () {});
+        
     });
 
 }])
 .controller('beta', ['$scope', '$window', function (sc, wi) {
     var __settings = app.settings;
 
-    sc.getToken = function (acct) {
+    sc.getAuthenticated = function(acct){
         if (!acct || !acct.user || !acct.pwd)
             return;
 
-        app.api.getToken({username: acct.user, password: acct.pwd})
-                .success(function (data, textStatus, jqxhr) {
-                    $('.form-signin .form-control').val('');
-                }).fail(function (jqXHR, textStatus) {
-            $('.form-signin .form-control').addClass('err');
-        }).always(function (ref1, ref2, ref3) {
-            if (app.api.isAuthenticated()) {
-                var go2url = wi.location.pathname;
-                wi.location.replace(go2url + '#/scheduler');
-            }
-        });
+        app.api.init({username: acct.user, password: acct.pwd})
+            .then(function(data) {
+                $('.form-signin .form-control').val('');
+
+                if (app.api.isAuthenticated()) {
+                    var go2url = wi.location.pathname;
+                    wi.location.replace(go2url + '#/scheduler');
+                }
+            },function (jqXHR, textStatus) {
+                $('.form-signin .form-control').addClass('err');
+            });
 
     };
-    sc.inputUser = function (e) {
+    
+    sc.inputUser = function(e){
         $('.form-signin .form-control').removeClass('err');
     };
 
@@ -49,8 +49,10 @@ angular.module('pcApp.controllers', [])
 
 }])
 .controller('gamma', ['$scope', '$window', function (sc, wi) {
+    var _api=app.api;
+        
     sc.$on('$routeChangeSuccess', function () {
-        if (!app.api.isAuthenticated()) {
+        if (!_api.isAuthenticated()) {
             var go2url = wi.location.pathname;
             wi.location.replace(go2url + '#/login');
             return;
@@ -67,47 +69,44 @@ angular.module('pcApp.controllers', [])
         $('div.pc-authenticate-only-section').fadeIn(150, function () {
         });
     });
+    
+    sc.$on('$viewContentLoaded',function(){
+        //app.api.transaction.loadMediaType();
+    });
 
-    sc.socialEvent = function () {
-        return app.api.transaction.getAllSocialEvents()
+    sc.getEvent = function (n) {
+        return _api.data.eventList.list[n];
     };
 
-    sc.getMediaType = function (n) {
-        return app.schema.mediaType[n];
+    sc.getMedia = function (n) {
+        return _api.data.mediaList.list[n].name;
     };
 
-    sc.getActionType = function (n) {
-        return app.schema.actionType[n];
+    sc.getAction = function (n) {
+        return _api.data.actionList.list[n].name;
     };
 
-    sc.getStatusType = function (n) {
-        return app.schema.statusType[n];
+    sc.getStatus = function (n) {
+        return _api.data.statusList.list[n].name;
     };
-
-    function _ref1(arr) {
-        var _ref = [];
-        for (var i = 0; i < arr.length; i++) {
-            _ref.push({
-                id: i,
-                name: arr[i]
-            });
-        }
-        return _ref;
-    }
-    ;
-
+    
     sc.mediaList = function () {
-        return _ref1(app.schema.mediaType);
+    //    return _ref1(app.api.data.mediaList.getArr());
+        return app.api.data.mediaList.getArr();
     };
 
     sc.actionList = function () {
-        return _ref1(app.schema.actionType);
+        return app.api.data.actionList.getArr();
     };
 
     sc.statusList = function () {
-        return _ref1(app.schema.statusType);
+        return app.api.data.statusList.getArr();
     };
-
+    
+    sc.eventList = function () {
+        return app.api.data.eventList.getArr();
+    };
+    
     sc.event={};
     
     sc.addEvent = function (event) {
@@ -121,7 +120,7 @@ angular.module('pcApp.controllers', [])
 
             if (_ref.getDate()=='NaN'||_ref=='Invalid Date'){
                 $('#eventdate').addClass('err');
-                return; 
+                return;
             }
                         
             if (!event){
@@ -147,13 +146,14 @@ angular.module('pcApp.controllers', [])
                 return;
             }
             
-            app.api.transaction.addAnEvent({
-                media: event.media-1,
-                action: event.action-1,
+            app.api.data.eventList.transaction.add({
+                media: event.media,
+                action: event.action,
                 eventdate: _ref.toLocaleDateString()+' '+_ref.toLocaleTimeString(),
                 message: event.message,
-                status: 2
+                status: 3
             });
+            
             sc.event={};
         }
         catch (e) {

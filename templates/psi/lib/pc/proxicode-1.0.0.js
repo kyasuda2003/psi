@@ -11,9 +11,9 @@
       }
     });
   };
-
+  
   app.util = {
-    array2json: function(arr, key) {
+    arr2json: function(arr, key) {
       var jsn, obj;
       jsn = {};
       for (obj in arr) {
@@ -21,7 +21,7 @@
       }
       return jsn;
     },
-    json2array: function(jsn) {
+    json2arr: function(jsn) {
       return $.map(jsn, function(value, index) {
         return [value];
       });
@@ -89,48 +89,155 @@
     }
   };
 
-  app.api = (function() {
-    var _this = this,
-        _userInfo = {},
-        _data={
-            eventList:{}
-        };
-    
-    return {
-      getToken:function(accInfo){
-        return $.post("{0}/api-token-auth/".format(app.settings.apihost),accInfo)
-                .success(function(data, textStatus, jqXHR){
-                    if (data.token)
-                        _userInfo.token=data.token;
-                });
-      },
-      transaction:{
-            addAnEvent:function(event){
-                event.id=Object.keys(_data.eventList).length;
-                _data.eventList[event.id.toString()]=event;
-            },
-            getAllSocialEvents:function(){
-                return $.map(_data.eventList, function(value, index) {
-                    return [value];
-                });
-            }
-      },
-      isAuthenticated:function(){
-          return _userInfo.token?true:false;
-      }
-    };
-  })();
-  
-  app.schema={
-      mediaType:['facebook',
-                 'twitter',
-                 'google'],
-      actionType:['Post',
-                'Birthday',
-                'Gift'],
-      statusType:['scheduled',
-              'processed',
-              'pending']
-  };
+    function api(){
+        //private
+        var _userInfo = {};
 
+        //privileged
+        this.data=(function(){
+            
+            var _dataList=function(){
+                var _id=0,_json2arr=app.util.json2arr,_ref=this;
+                
+                this.list={};
+                this.getArr=function(){
+                    return _json2arr(this.list);
+                };
+                this.transaction={
+                    add:function(obj){
+                        obj.id=_id++;
+                        _ref.list[obj.id.toString()]=obj;
+                    }
+                };
+            };
+            
+            //event
+            function _eventList(){
+                _dataList.call(this);
+            };
+            
+            _eventList.prototype=Object.create(_dataList.prototype);
+            _eventList.prototype.constructor=_eventList;
+            
+            //media
+            function _mediaList(){
+                _dataList.call(this);
+            };
+            
+            _mediaList.prototype=Object.create(_dataList.prototype);
+            _mediaList.prototype.constructor=_mediaList;
+            
+            //action
+            function _actionList(){
+                _dataList.call(this);
+            };
+            
+            _actionList.prototype=Object.create(_dataList.prototype);
+            _actionList.prototype.constructor=_actionList;
+            
+            //status
+            function _statusList(){
+                _dataList.call(this);
+            };
+            
+            _statusList.prototype=Object.create(_dataList.prototype);
+            _statusList.prototype.constructor=_statusList;
+            
+            return {
+                eventList:new _eventList(),
+                mediaList:new _mediaList(),
+                actionList:new _actionList(),
+                statusList:new _statusList()
+            };
+        }).call(this);
+        
+        this.util=app.util;
+
+        this.loadToken=function(accInfo){
+            //var _ref=this;
+            return $.post("{0}/api-token-auth/".format(app.settings.apihost),{ptoken:btoa(accInfo.username+":"+accInfo.password)})
+            .done(function(data, textStatus, jqXHR){
+                if (data.token)
+                    _userInfo.token=data.token;
+            })
+            .fail(function(xhr,err,obj){
+                console.log('loadToken failed.');
+            });
+        };
+
+        this.loadMediaList=function(){
+            var _ref=this;
+            return $.ajax({url:"{0}{1}/medias/".format(app.settings.apihost, app.settings.apipath),
+                           headers:{Authorization: "Token "+_userInfo.token}})
+            .done(function(data, textStatus, jqxhr) {
+                if (jqxhr.status=="200")
+                    _ref.data.mediaList.list=_ref.util.arr2json(data.results,'id');
+            })
+            .fail(function(xhr,err,obj){
+                console.log('loadMeidaList failed.');
+            });
+        };
+        
+        this.loadActionList=function(){
+            var _ref=this;
+            return $.ajax({url:"{0}{1}/actions/".format(app.settings.apihost, app.settings.apipath),
+                           headers:{Authorization: "Token "+_userInfo.token}})
+            .done(function(data, textStatus, jqxhr) {
+                if (jqxhr.status=="200")
+                    _ref.data.actionList.list=_ref.util.arr2json(data.results,'id');
+            })
+            .fail(function(xhr,err,obj){
+                console.log('loadActionList failed.');
+            });
+        };
+        
+        this.loadEventList=function(){
+            var _ref=this;
+            return $.ajax({url:"{0}{1}/events/".format(app.settings.apihost, app.settings.apipath),
+                           headers:{Authorization: "Token "+_userInfo.token}})
+            .done(function(data, textStatus, jqxhr) {
+                if (jqxhr.status=="200")
+                    _ref.data.eventList.list=_ref.util.arr2json(data.results,'id');
+            })
+            .fail(function(xhr,err,obj){
+                console.log('loadEventList failed.');
+            });
+        };
+        
+        this.loadStatusList=function(){
+            var _ref=this;
+            return $.ajax({url:"{0}{1}/statuses/".format(app.settings.apihost, app.settings.apipath),
+                           headers:{Authorization: "Token "+_userInfo.token}})
+            .done(function(data, textStatus, jqxhr) {
+                if (jqxhr.status=="200")
+                    _ref.data.statusList.list=_ref.util.arr2json(data.results,'id');
+            })
+            .fail(function(xhr,err,obj){
+                console.log('loadStatusList failed.');
+            });
+        };
+
+        this.isAuthenticated=function(){
+            return _userInfo.token?true:false;
+        };
+
+    };
+
+    //public
+    api.prototype = {
+        init:function(accInfo){
+            var _ref=this;
+            return _ref.loadToken(accInfo)
+                .then(function(data,status,xhr){
+                    return _ref.loadMediaList();
+                }).then(function(data,status,xhr){
+                    return _ref.loadActionList();
+                }).then(function(data,status,xhr){
+                    return _ref.loadStatusList();
+                });
+        }
+    };
+    
+    app.api=new api();
+  
 }).call(this);
