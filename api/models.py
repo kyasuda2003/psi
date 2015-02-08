@@ -25,7 +25,7 @@ class Account(models.Model):
     def __unicode__(self):
         return self.user.username
 
-class SocialNetwork(models.Model):
+class Media(models.Model):
     name = models.CharField(max_length=200)
     def __unicode__(self):
         return self.name
@@ -35,10 +35,16 @@ class Action(models.Model):
     def __unicode__(self):
         return self.name
 
-class SocialNetworkScheduler(models.Model):
-    socialNetwork = models.ManyToManyField(SocialNetwork, verbose_name="social netowrk list")
+class Status(models.Model):
+    name = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.name
+
+class Scheduler(models.Model):
+    media = models.ManyToManyField(Media, verbose_name="media list")
     action = models.ManyToManyField(Action,verbose_name="action list")
     comment = models.TextField(max_length=500)
+    status = models.ManyToManyField(Status, verbose_name="status list") 
     def __unicode__(self):
         return self.message
 

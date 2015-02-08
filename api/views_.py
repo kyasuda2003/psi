@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from proxicode.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer, SocialNetworkSerializer, ActionSerializer, SocialNetworkSchedulerSerializer
-from proxicode.api.models import Account, Photo, Category, Product, SocialNetwork, Action, SocialNetworkScheduler
+from proxicode.api.serializers import UserSerializer, GroupSerializer, CategorySerializer, AccountSerializer, PhotoSerializer, ProductSerializer, MediaSerializer, ActionSerializer, SchedulerSerializer, StatusSerializer
+from proxicode.api.models import Account, Photo, Category, Product, Media, Action, Scheduler, Status
 import datetime
 from django.utils.timezone import utc
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -33,33 +33,53 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-class SocialNetworkViewSet(viewsets.ModelViewSet):
-    queryset = SocialNetwork.objects.all()
-    serializer_class = SocialNetworkSerializer
+class MediaViewSet(viewsets.ModelViewSet):
+    queryset = Media.objects.all()
+    serializer_class = MediaSerializer
 
 class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
 
-class SocialNetworkSchedulerViewSet(viewsets.ModelViewSet):
-    queryset = SocialNetworkScheduler.objects.all()
-    serializer_class = SocialNetworkSchedulerSerializer
+class SchedulerViewSet(viewsets.ModelViewSet):
+    queryset = Scheduler.objects.all()
+    serializer_class = SchedulerSerializer
+
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
 
 class ObtainExpiringAuthToken(ObtainAuthToken):
     def post(self, request):
-        serializer = AuthTokenSerializer(data=request.data)
+        import base64
+
+        #data = json.loads(request.data)
+        print request.data
+        _ref = {}
+        try:
+            _ref=base64.b64decode(request.data["ptoken"]).split(":")
+            _ref={u'username':_ref[0],u'password':_ref[1]}
+            print _ref
+        except:
+            print "Requeset value errors."
+        
+        #required
+        serializer = AuthTokenSerializer(data=_ref)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         
+        #required
         Token.objects.filter(user=user).delete()
         Token.objects.create(user=user)
         token, created = Token.objects.get_or_create(user=user)
+        
         #newKey=Token.generate_key()
         #Token.objects.filter(user=user).update(key=token.generate_key())
         #if not created:
         # update the created time of the token to keep it valid                                                                                       
         #token.created = datetime.datetime.utcnow().replace(tzinfo=utc)
         #token.save()
+        #return Response({})
 
         return Response({'token': token.key, 'created':token.created})
 

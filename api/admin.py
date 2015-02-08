@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from proxicode.api.models import SocialNetwork, Action, SocialNetworkScheduler, Category, Photo, Product, Account
+from proxicode.api.models import Media, Action, Scheduler, Status, Category, Photo, Product, Account
 
 class AccountAdmin(admin.ModelAdmin):
     pass
@@ -17,19 +17,23 @@ class PhotoAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     pass
 
-class SocialNetworkAdmin(admin.ModelAdmin):
+class MediaAdmin(admin.ModelAdmin):
     pass
 
 class ActionAdmin(admin.ModelAdmin):
     pass
 
-class SocialNetworkSchedulerAdmin(admin.ModelAdmin):
+class SchedulerAdmin(admin.ModelAdmin):
+    pass
+
+class StatusAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(SocialNetwork, SocialNetworkAdmin)
+admin.site.register(Media, MediaAdmin)
 admin.site.register(Action, ActionAdmin)
-admin.site.register(SocialNetworkScheduler, SocialNetworkSchedulerAdmin)
+admin.site.register(Scheduler, SchedulerAdmin)
+admin.site.register(Status,StatusAdmin)

@@ -13,9 +13,10 @@ router.register(r'categories',views_.CategoryViewSet)
 router.register(r'photos',views_.PhotoViewSet)
 router.register(r'accounts',views_.AccountViewSet)
 router.register(r'products',views_.ProductViewSet)
-router.register(r'social-networks',views_.SocialNetworkViewSet)
+router.register(r'medias',views_.MediaViewSet)
 router.register(r'actions',views_.ActionViewSet)
-router.register(r'social-network-schedulers',views_.SocialNetworkSchedulerViewSet)
+router.register(r'schedulers',views_.SchedulerViewSet)
+router.register(r'statuses',views_.StatusViewSet)
 
 
 # Wire up our API using automatic URL routing.
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'^api-token-auth/', views_.obtain_auth_token),
     url(r'^media/photos/(?P<filename>[\w,\s-]+\.[A-Za-z]{3})(/(?P<isthumb>[\w,\s]))?', views_.show_picture),
     url(r"^$", views_.index,name='index'),
+    #url(r"^token/",views_.getAuthToken,name="auth-token"),
     url(r'^entry', views_.index, name='index'),
-    url(r'', include('social_auth.urls')),
+    #url(r'', include('social_auth.urls')),
 ]
