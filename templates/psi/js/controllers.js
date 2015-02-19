@@ -73,6 +73,10 @@ angular.module('pcApp.controllers', [])
     sc.$on('$viewContentLoaded',function(){
         //app.api.transaction.loadMediaType();
     });
+    
+    sc.getFormattedDate=function(f){
+        return (new Date(f)).toLocaleString();
+    };
 
     sc.getEvent = function (n) {
         return _api.data.eventList.list[n];
@@ -141,20 +145,38 @@ angular.module('pcApp.controllers', [])
                 return;
             }
             
-            if (!event.message){
+            if (!event.comment){
                 $('#txt-message').addClass('err');
                 return;
             }
             
-            app.api.data.eventList.transaction.add({
-                media: event.media,
-                action: event.action,
-                eventdate: _ref.toLocaleDateString()+' '+_ref.toLocaleTimeString(),
-                message: event.message,
-                status: 3
+            event.proxydate=
+                '{2}-{0}-{1} {3}:{4}:{5}'.format(('0'+(_ref.getMonth()+1)).slice(-2),('0'+_ref.getDate()).slice(-2),_ref.getFullYear(),
+                                                 ('0'+_ref.getUTCHours()).slice(-2),('0'+_ref.getUTCMinutes()).slice(-2),('0'+_ref.getUTCSeconds()).slice(-2));
+                
+            app.api.submitAScheduler(event).then(function(data){
+                try{
+                    app.api.data.eventList.transaction.add({
+                        media: data.media,
+                        action: data.action,
+                        proxydate: (new Date(data.proxydate)).toLocaleString(),
+                        comment: data.comment,
+                        status: 3
+                    });
+                    sc.$apply(function(){
+                        sc.eventList();
+                        sc.event={};
+                    });
+                }
+                catch(e){
+                    console.log('Error create event details. err:'+e);
+                }
+                
             });
             
-            sc.event={};
+            
+            
+            
         }
         catch (e) {
             $('#eventdate').addClass('err');

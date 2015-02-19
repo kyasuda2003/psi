@@ -21,20 +21,20 @@
                     </select></td>
                 <td><div class="form-group">
                         <div class="input-group date pc-datetimepicker">
-                            <input type="text" class="form-control" placeholder="Date & Time" id="eventdate" required>
+                            <input type="text" class="form-control" placeholder="Date & Time" id="eventdate" ng-model="event.proxydate" required>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
                     </div></td>
-                <td><textarea id="txt-message" class="form-control" rows="3" placeholder="Your Message" ng-model="event.message" required></textarea></td>
+                <td><textarea id="txt-message" class="form-control" rows="3" placeholder="Your Message" ng-model="event.comment" required></textarea></td>
 
                 <td><button type="submit" ng-click="addEvent(event)" class="btn btn-default">Add</button></td></tr>
             <tr ng-repeat="evt in eventList() | orderBy:'id':true">
                 <td>{{getMedia(evt.media)}}</td>
                 <td>{{getAction(evt.action)}}</td>
-                <td>{{evt.eventdate}}</td>
-                <td>{{evt.message}}</td>
+                <td>{{getFormattedDate(evt.proxydate)}}</td>
+                <td>{{evt.comment}}</td>
                 <td>{{getStatus(evt.status)}}</td>
             </tr>
         </tbody>
