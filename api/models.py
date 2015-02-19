@@ -17,36 +17,39 @@ import os
 #    if created:
 #        Token.objects.create(user=instance)
 
-class Account(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    #username   = models.CharField(max_length=100)
-    #last_login = models.DateTimeField(blank=True)
-    is_active  = models.BooleanField(default=False)
-    def __unicode__(self):
-        return self.user.username
-
 class Media(models.Model):
     name = models.CharField(max_length=200)
     def __unicode__(self):
         return self.name
 
 class Action(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200,unique=True)
     def __unicode__(self):
         return self.name
 
 class Status(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,unique=True)
     def __unicode__(self):
         return self.name
 
-class Scheduler(models.Model):
-    media = models.ManyToManyField(Media, verbose_name="media list")
-    action = models.ManyToManyField(Action,verbose_name="action list")
-    comment = models.TextField(max_length=500)
-    status = models.ManyToManyField(Status, verbose_name="status list") 
+class Account(models.Model):
+    is_active  = models.BooleanField(default=False)
+    fb_token = models.CharField(max_length=512)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     def __unicode__(self):
-        return self.message
+        return self.user.username
+
+class Scheduler(models.Model):
+    user = models.ForeignKey(User)
+    media = models.ForeignKey(Media)
+    action = models.ForeignKey(Action)
+    comment = models.TextField(max_length=500)
+    status = models.ForeignKey(Status,default=2)
+    proxydate = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    def __unicode__(self):
+        return self.comment
 
 class Photo(models.Model):
     content = models.ImageField(upload_to=settings.UPLOAD_DIR)

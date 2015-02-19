@@ -8,6 +8,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
+from django.shortcuts import get_object_or_404
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -41,10 +42,32 @@ class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
 
-class SchedulerViewSet(viewsets.ModelViewSet):
-    queryset = Scheduler.objects.all()
-    serializer_class = SchedulerSerializer
+from rest_framework import status
 
+class SchedulerViewSet(viewsets.ModelViewSet):
+    model = Scheduler
+    serializer_class = SchedulerSerializer
+    def get_queryset(self):    
+        return Scheduler.objects.filter(user=self.request.user)        
+    
+    def create(self, request):
+        import json
+        current_user = request.user
+        _ref={}
+        _ref["action"]=request.data["action"]
+        _ref["media"]=request.data["media"]
+        _ref["proxydate"]=request.data["proxydate"]
+        _ref["comment"]=request.data["comment"]
+        _ref["user"]=current_user.id
+        print _ref
+        
+        scheduler = SchedulerSerializer(data=_ref)
+        if scheduler.is_valid():
+            scheduler.save()
+            return Response(scheduler.data, status=status.HTTP_201_CREATED)
+        
+        return Response(scheduler.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 class StatusViewSet(viewsets.ModelViewSet):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
@@ -92,6 +115,9 @@ def index(request):
     #return render(request, 'polls/index.html', context)
     return render(request, 'psi/index.django.html')
 
+#def fb_callback(request):
+    
+    
 def show_picture(request, filename, isthumb):
     from django.conf import settings
     from django.http import HttpResponse
